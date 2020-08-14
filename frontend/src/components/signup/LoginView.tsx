@@ -1,15 +1,31 @@
 import React, { useState } from "react";
 import { Form, Container, Row, Col, Button } from "react-bootstrap";
+import { LoginParams, API } from "../../api";
+import { LoginState } from "../../types";
+import { useHistory } from "react-router-dom";
 
-type LoginViewProps = {};
+type LoginViewProps = {
+  onLogin: (info: LoginState) => void;
+};
 
 export default function LoginView(props: LoginViewProps) {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    alert("Submit");
+    const res = await API.login({ email, password });
+    if (res.status === "incorrect-login") {
+      alert("Incorrect username or password");
+    } else if (res.status === "ok") {
+      props.onLogin({
+        email,
+        hospital: res.hospital,
+        token: res.token,
+      });
+      history.push("/dashboard");
+    }
   }
 
   return (

@@ -10,3 +10,14 @@ export type Person = {
   id: string;
   locations: WeightedCoordinate[];
 };
+
+export type Hospital = {
+  name: string;
+  address: string;
+};
+
+export type LoginState = {
+  hospital: Hospital;
+  email: string;
+  token: string;
+};

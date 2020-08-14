@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Map, Google } from "@thesilican/react-google-maps";
 import HomeView from "./components/home/HomeView";
 import TopNavBar from "./components/TopNavBar";
@@ -7,13 +7,30 @@ import DashboardView from "./components/dashboard/DashboardView";
 import LoginView from "./components/signup/LoginView";
 import SignUpView from "./components/signup/SignUpView";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { LoginState } from "./types";
+
+function loginStore(): LoginState | null {
+  const res = window.localStorage.getItem("login");
+  if (res === null) return null;
+  return JSON.parse(res);
+}
 
 export default function App() {
+  const [login, setLogin] = useState(loginStore);
+  function handleLogin(state: LoginState) {
+    setLogin(state);
+    window.localStorage.setItem("login", JSON.stringify(state));
+  }
+  function handleLogout() {
+    setLogin(null);
+    window.localStorage.removeItem("login");
+  }
+
   return (
     <Google>
       <div className="App">
         <BrowserRouter>
-          <TopNavBar />
+          <TopNavBar login={login} onLogout={handleLogout} />
           <Switch>
             <Route exact path="/">
               <HomeView />
@@ -25,10 +42,10 @@ export default function App() {
               <DashboardView />
             </Route>
             <Route path="/login">
-              <LoginView />
+              <LoginView onLogin={handleLogin} />
             </Route>
             <Route path="/signup">
-              <SignUpView />
+              <SignUpView onLogin={handleLogin} />
             </Route>
             <Route path="*">
               <Redirect to="/" />

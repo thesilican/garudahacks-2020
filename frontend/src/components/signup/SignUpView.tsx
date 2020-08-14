@@ -1,18 +1,39 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Map } from "@thesilican/react-google-maps";
+import { API } from "../../api";
+import { LoginState } from "../../types";
+import { useHistory } from "react-router-dom";
 
-type SignUpViewProps = {};
+type SignUpViewProps = {
+  onLogin: (info: LoginState) => void;
+};
 
 export default function SignUpView(props: SignUpViewProps) {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    alert("Submit");
+    const hospital = { address, name };
+    const res = await API.signup({
+      email,
+      password,
+      hospital,
+    });
+    if (res.status === "email-taken") {
+      alert("Sorry, that email has been taken");
+    } else if (res.status === "ok") {
+      props.onLogin({
+        email,
+        hospital,
+        token: res.token,
+      });
+      history.push("/dashboard");
+    }
   }
 
   return (

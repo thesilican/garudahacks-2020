@@ -1,8 +1,12 @@
 import React from "react";
 import { Button, Form, Nav, Navbar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { LoginState } from "../types";
 
-type TopNavBarProps = {};
+type TopNavBarProps = {
+  login: LoginState | null;
+  onLogout: () => void;
+};
 
 export default function TopNavBar(props: TopNavBarProps) {
   const history = useHistory();
@@ -11,6 +15,10 @@ export default function TopNavBar(props: TopNavBarProps) {
   }
   function handleSignupClick() {
     history.push("/signup");
+  }
+  function handleLogoutClick() {
+    props.onLogout();
+    history.push("/");
   }
 
   return (
@@ -22,18 +30,27 @@ export default function TopNavBar(props: TopNavBarProps) {
           <Nav.Link href="/map">Map</Nav.Link>
           <Nav.Link href="/dashboard">Dashboard</Nav.Link>
         </Nav>
-        <Form inline>
-          <Button
-            className="mr-3"
-            variant="outline-light"
-            onClick={handleLoginClick}
-          >
-            Login
-          </Button>
-          <Button variant="outline-light" onClick={handleSignupClick}>
-            Signup
-          </Button>
-        </Form>
+        {props.login ? (
+          <Form inline>
+            <Navbar.Text className="mr-3">Bob's hospital</Navbar.Text>
+            <Button variant="outline-light" onClick={handleLogoutClick}>
+              Logout
+            </Button>
+          </Form>
+        ) : (
+          <Form inline>
+            <Button
+              className="mr-3"
+              variant="outline-light"
+              onClick={handleLoginClick}
+            >
+              Login
+            </Button>
+            <Button variant="outline-light" onClick={handleSignupClick}>
+              Signup
+            </Button>
+          </Form>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
