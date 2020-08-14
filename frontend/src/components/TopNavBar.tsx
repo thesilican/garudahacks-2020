@@ -32,7 +32,9 @@ export default function TopNavBar(props: TopNavBarProps) {
         </Nav>
         {props.login ? (
           <Form inline>
-            <Navbar.Text className="mr-3">Bob's hospital</Navbar.Text>
+            <Navbar.Text className="mr-3">
+              {props.login.hospital.name}
+            </Navbar.Text>
             <Button variant="outline-light" onClick={handleLogoutClick}>
               Logout
             </Button>
