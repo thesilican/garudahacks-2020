@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Map } from "@thesilican/react-google-maps";
+import { Map, Coordinate, Marker } from "@thesilican/react-google-maps";
 import { API } from "../../api";
 import { LoginState } from "../../types";
 import { useHistory } from "react-router-dom";
+import { useDebouncedCallback } from "use-debounce";
 
 type SignUpViewProps = {
   onLogin: (info: LoginState) => void;
@@ -15,7 +16,17 @@ export default function SignUpView(props: SignUpViewProps) {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [addressMarker, setAddressMarker] = useState(null as Coordinate | null);
+  async function getAddress(address: string) {
+    const res = await API.location({ address });
+    setAddressMarker(res.location);
+  }
+  const [getAddressDebounced] = useDebouncedCallback(getAddress, 500);
 
+  function handleAddressInput(address: string) {
+    setAddress(address);
+    if (address !== "") getAddressDebounced(address);
+  }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const hospital = { address, name };
@@ -56,10 +67,12 @@ export default function SignUpView(props: SignUpViewProps) {
               <Form.Control
                 required
                 value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={(e) => handleAddressInput(e.target.value)}
               ></Form.Control>
               <div className="map-wrapper">
-                <Map></Map>
+                <Map center={addressMarker ?? undefined}>
+                  {addressMarker ? <Marker position={addressMarker} /> : null}
+                </Map>
               </div>
             </Form.Group>
             <Form.Group>

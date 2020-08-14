@@ -48747,359 +48747,7 @@ function TopNavBar(props) {
 }
 
 exports.default = TopNavBar;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../src/components/heatmap/HeatMapView.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_google_maps_1 = require("@thesilican/react-google-maps");
-
-var react_1 = __importDefault(require("react"));
-
-var data = [{
-  lat: 37.782,
-  lng: -122.447
-}, {
-  lat: 37.782,
-  lng: -122.445
-}, {
-  lat: 37.782,
-  lng: -122.443
-}, {
-  lat: 37.782,
-  lng: -122.441
-}, {
-  lat: 37.782,
-  lng: -122.439
-}, {
-  lat: 37.782,
-  lng: -122.437
-}, {
-  lat: 37.782,
-  lng: -122.435
-}, {
-  lat: 37.785,
-  lng: -122.447
-}, {
-  lat: 37.785,
-  lng: -122.445
-}, {
-  lat: 37.785,
-  lng: -122.443
-}, {
-  lat: 37.785,
-  lng: -122.441
-}, {
-  lat: 37.785,
-  lng: -122.439
-}, {
-  lat: 37.785,
-  lng: -122.437
-}, {
-  lat: 37.785,
-  lng: -122.435
-}];
-
-function HeatMapView(props) {
-  return react_1.default.createElement("div", {
-    className: "HeatMapView"
-  }, react_1.default.createElement(react_google_maps_1.Map, {
-    zoom: 14
-  }, react_1.default.createElement(react_google_maps_1.HeatMap, {
-    data: data
-  }), react_1.default.createElement(react_google_maps_1.Marker, {
-    position: {
-      lat: 37.785,
-      lng: -122.439
-    }
-  })), react_1.default.createElement("div", {
-    className: "controls"
-  }, react_1.default.createElement("span", null, "Infection Chance:", react_1.default.createElement("br", null), react_1.default.createElement("span", {
-    className: "lg"
-  }, "100%"))));
-}
-
-exports.default = HeatMapView;
-},{"@thesilican/react-google-maps":"../node_modules/@thesilican/react-google-maps/dist/index.js","react":"../node_modules/react/index.js"}],"../src/util.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var Util = {
-  joinName: function joinName(name) {
-    return name.first + " " + name.last;
-  }
-};
-exports.default = Util;
-},{}],"../src/components/dashboard/DashboardLeft.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importDefault(require("react"));
-
-var react_bootstrap_1 = require("react-bootstrap");
-
-var util_1 = __importDefault(require("../../util"));
-
-function DashboardLeft(props) {
-  return react_1.default.createElement("div", {
-    className: "DashboardLeft"
-  }, react_1.default.createElement("div", {
-    className: "top"
-  }, react_1.default.createElement("h1", null, "Joe's Hospital"), react_1.default.createElement("p", null, "60 My Hospital Lane, Toronto, Ontario")), react_1.default.createElement("div", {
-    className: "patients"
-  }, react_1.default.createElement("div", {
-    className: "wrapper"
-  }, react_1.default.createElement("h2", null, "Patients"), props.patients.map(function (x, i) {
-    return react_1.default.createElement(PatientItem, {
-      key: x.id,
-      name: x.name,
-      onClick: function onClick() {
-        return props.onChangeIndex(i);
-      },
-      selected: i === props.selIndex
-    });
-  }))), react_1.default.createElement("div", {
-    className: "bottom"
-  }, react_1.default.createElement(react_bootstrap_1.Button, {
-    className: "mr-2"
-  }, "Add Patient"), react_1.default.createElement(react_bootstrap_1.Button, {
-    variant: "danger"
-  }, "Remove Patient")));
-}
-
-exports.default = DashboardLeft;
-
-function PatientItem(props) {
-  function handleClick(e) {
-    e.preventDefault();
-    props.onClick();
-  }
-
-  return react_1.default.createElement("div", {
-    className: "PatientItem"
-  }, react_1.default.createElement("a", {
-    href: props.selected ? undefined : "",
-    onClick: handleClick
-  }, util_1.default.joinName(props.name)));
-}
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../util":"../src/util.ts"}],"../src/components/dashboard/DashboardRight.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importDefault(require("react"));
-
-var react_google_maps_1 = require("@thesilican/react-google-maps");
-
-var react_bootstrap_1 = require("react-bootstrap");
-
-function DashboardRight(props) {
-  return react_1.default.createElement("div", {
-    className: "DashboardRight"
-  }, react_1.default.createElement(react_bootstrap_1.Form, {
-    inline: true,
-    className: "top"
-  }, react_1.default.createElement(react_bootstrap_1.Form.Control, {
-    className: "mr-2",
-    placeholder: "Search for location"
-  }), react_1.default.createElement(react_bootstrap_1.Button, {
-    type: "submit"
-  }, "Search")), react_1.default.createElement("div", {
-    className: "wrapper"
-  }, react_1.default.createElement(react_google_maps_1.Map, null)), react_1.default.createElement("div", {
-    className: "bottom"
-  }, react_1.default.createElement(react_bootstrap_1.Button, {
-    className: "mr-2"
-  }, "Add"), react_1.default.createElement(react_bootstrap_1.Button, null, "Remove")));
-}
-
-exports.default = DashboardRight;
-},{"react":"../node_modules/react/index.js","@thesilican/react-google-maps":"../node_modules/@thesilican/react-google-maps/dist/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"../src/components/dashboard/DashboardView.tsx":[function(require,module,exports) {
-"use strict";
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importStar(require("react"));
-
-var react_bootstrap_1 = require("react-bootstrap");
-
-var DashboardLeft_1 = __importDefault(require("./DashboardLeft"));
-
-var DashboardRight_1 = __importDefault(require("./DashboardRight"));
-
-var patients = [{
-  id: "0",
-  name: {
-    first: "Bob",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "1",
-  name: {
-    first: "Joe",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "3",
-  name: {
-    first: "Jane",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "4",
-  name: {
-    first: "Bob",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "5",
-  name: {
-    first: "Joe",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "6",
-  name: {
-    first: "Jane",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "7",
-  name: {
-    first: "Bob",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "8",
-  name: {
-    first: "Joe",
-    last: "Marley"
-  },
-  locations: []
-}, {
-  id: "9",
-  name: {
-    first: "Jane",
-    last: "Marley"
-  },
-  locations: []
-}];
-
-function DashboardView(props) {
-  var _react_1$useState = react_1.useState(0),
-      _react_1$useState2 = _slicedToArray(_react_1$useState, 2),
-      selIndex = _react_1$useState2[0],
-      setSelIndex = _react_1$useState2[1];
-
-  function handleChangeIndex(index) {
-    setSelIndex(index);
-  }
-
-  return react_1.default.createElement(react_bootstrap_1.Container, {
-    className: "DashboardView"
-  }, react_1.default.createElement(react_bootstrap_1.Row, null, react_1.default.createElement(react_bootstrap_1.Col, {
-    sm: 12,
-    md: 4
-  }, react_1.default.createElement(DashboardLeft_1.default, {
-    patients: patients,
-    selIndex: selIndex,
-    onChangeIndex: handleChangeIndex
-  })), react_1.default.createElement(react_bootstrap_1.Col, {
-    sm: 12,
-    md: 8
-  }, react_1.default.createElement(DashboardRight_1.default, null))));
-}
-
-exports.default = DashboardView;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./DashboardLeft":"../src/components/dashboard/DashboardLeft.tsx","./DashboardRight":"../src/components/dashboard/DashboardRight.tsx"}],"../src/api/index.ts":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../src/api/index.ts":[function(require,module,exports) {
 "use strict";
 
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -49205,38 +48853,865 @@ exports.API = {
       }, _callee2);
     }));
   },
-  location: function location(params) {
+  heatmap: function heatmap() {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var address, url, res, data;
+      var res, data;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              address = encodeURIComponent(params.address);
-              url = new URL("/api/location");
-              url.searchParams.append("address", address);
-              _context3.next = 5;
-              return window.fetch(url.toString());
+              _context3.next = 2;
+              return window.fetch("/api/heatmap");
 
-            case 5:
+            case 2:
               res = _context3.sent;
-              _context3.next = 8;
+              _context3.next = 5;
               return res.json();
 
-            case 8:
+            case 5:
               data = _context3.sent;
               return _context3.abrupt("return", data);
 
-            case 10:
+            case 7:
             case "end":
               return _context3.stop();
           }
         }
       }, _callee3);
     }));
+  },
+  infectionsGet: function infectionsGet(params) {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      var token, url, res, data;
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              token = encodeURIComponent(params.token);
+              url = "/api/infections?token=" + token;
+              _context4.next = 4;
+              return window.fetch(url);
+
+            case 4:
+              res = _context4.sent;
+              _context4.next = 7;
+              return res.json();
+
+            case 7:
+              data = _context4.sent;
+              return _context4.abrupt("return", data);
+
+            case 9:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+  },
+  infectionsPost: function infectionsPost(params) {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+      var res, data;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return window.fetch("/api/infections", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(params)
+              });
+
+            case 2:
+              res = _context5.sent;
+              _context5.next = 5;
+              return res.json();
+
+            case 5:
+              data = _context5.sent;
+              return _context5.abrupt("return", data);
+
+            case 7:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+  },
+  infectionsPatch: function infectionsPatch(params) {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+      var res, data;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return window.fetch("/api/infections", {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(params)
+              });
+
+            case 2:
+              res = _context6.sent;
+              _context6.next = 5;
+              return res.json();
+
+            case 5:
+              data = _context6.sent;
+              return _context6.abrupt("return", data);
+
+            case 7:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+  },
+  infectionsDelete: function infectionsDelete(params) {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+      var res, data;
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.next = 2;
+              return window.fetch("/api/infections", {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(params)
+              });
+
+            case 2:
+              res = _context7.sent;
+              _context7.next = 5;
+              return res.json();
+
+            case 5:
+              data = _context7.sent;
+              return _context7.abrupt("return", data);
+
+            case 7:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+  },
+  location: function location(params) {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+      var address, url, res, data;
+      return regeneratorRuntime.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              address = encodeURIComponent(params.address);
+              url = "/api/location?address=" + address;
+              _context8.next = 4;
+              return window.fetch(url);
+
+            case 4:
+              res = _context8.sent;
+              _context8.next = 7;
+              return res.json();
+
+            case 7:
+              data = _context8.sent;
+              return _context8.abrupt("return", data);
+
+            case 9:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
   }
 };
-},{}],"../src/components/signup/LoginView.tsx":[function(require,module,exports) {
+},{}],"../src/util.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Util = {
+  joinName: function joinName(name) {
+    return name.first + " " + name.last;
+  },
+  getInfectionChance: function getInfectionChance(location, infections) {
+    return 1;
+  }
+};
+exports.default = Util;
+},{}],"../src/components/heatmap/HeatMapView.tsx":[function(require,module,exports) {
+"use strict";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_google_maps_1 = require("@thesilican/react-google-maps");
+
+var react_1 = __importStar(require("react"));
+
+var api_1 = require("../../api");
+
+var util_1 = __importDefault(require("../../util"));
+
+function HeatMapView(props) {
+  var _react_1$useState = react_1.useState(null),
+      _react_1$useState2 = _slicedToArray(_react_1$useState, 2),
+      floatMarker = _react_1$useState2[0],
+      setFloatMarker = _react_1$useState2[1];
+
+  var _react_1$useState3 = react_1.useState(null),
+      _react_1$useState4 = _slicedToArray(_react_1$useState3, 2),
+      data = _react_1$useState4[0],
+      setData = _react_1$useState4[1];
+
+  var center = data ? data[0] : undefined;
+  var infectionChance = floatMarker && data ? util_1.default.getInfectionChance(floatMarker, data) : null;
+  react_1.useEffect(function () {
+    api_1.API.heatmap().then(function (data) {
+      setData(data.locations);
+    });
+  }, []);
+
+  function handleMapClick(coord) {
+    setFloatMarker(coord);
+  }
+
+  function handleFloatDrag(coord) {
+    setFloatMarker(coord);
+  }
+
+  return react_1.default.createElement("div", {
+    className: "HeatMapView"
+  }, react_1.default.createElement(react_google_maps_1.Map, {
+    center: center,
+    zoom: 14,
+    onClick: function onClick(m, e) {
+      return handleMapClick(e.latLng.toJSON());
+    }
+  }, react_1.default.createElement(react_google_maps_1.HeatMap, {
+    data: data !== null && data !== void 0 ? data : [],
+    radius: 15
+  }), floatMarker && react_1.default.createElement(react_google_maps_1.Marker, {
+    position: floatMarker,
+    draggable: true,
+    onDragEnd: function onDragEnd(m) {
+      var _a, _b;
+
+      return handleFloatDrag((_b = (_a = m.getPosition()) === null || _a === void 0 ? void 0 : _a.toJSON()) !== null && _b !== void 0 ? _b : null);
+    }
+  })), react_1.default.createElement("div", {
+    className: "controls"
+  }, floatMarker ? react_1.default.createElement("span", null, "Infection Chance:", react_1.default.createElement("br", null), react_1.default.createElement("span", {
+    className: "lg"
+  }, ((infectionChance !== null && infectionChance !== void 0 ? infectionChance : -1) * 100).toFixed(0), "%")) : react_1.default.createElement("span", null, "Click on the map to see how dangerous different spots are")));
+}
+
+exports.default = HeatMapView;
+},{"@thesilican/react-google-maps":"../node_modules/@thesilican/react-google-maps/dist/index.js","react":"../node_modules/react/index.js","../../api":"../src/api/index.ts","../../util":"../src/util.ts"}],"../src/components/dashboard/DashboardLeft.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importDefault(require("react"));
+
+var react_bootstrap_1 = require("react-bootstrap");
+
+var util_1 = __importDefault(require("../../util"));
+
+function DashboardLeft(props) {
+  function handleAddClick() {
+    var _a;
+
+    var text = (_a = prompt("What is the name of your patient?")) === null || _a === void 0 ? void 0 : _a.split(" ");
+
+    if (!text || text.length < 2) {
+      alert("That is not a valid name");
+      return;
+    }
+
+    var name = {
+      first: text[0],
+      last: text[1]
+    };
+    props.onAddPerson(name);
+  }
+
+  function handleRemoveClick() {
+    var person = props.patients[props.selIndex];
+    var res = confirm("Are you sure you want to remove " + util_1.default.joinName(person.name) + " from your records?");
+
+    if (!res) {
+      return;
+    }
+
+    props.onRemovePerson();
+  }
+
+  return react_1.default.createElement("div", {
+    className: "DashboardLeft"
+  }, react_1.default.createElement("div", {
+    className: "top"
+  }, react_1.default.createElement("h1", null, props.hospital.name), react_1.default.createElement("p", null, props.hospital.address)), react_1.default.createElement("div", {
+    className: "patients"
+  }, react_1.default.createElement("div", {
+    className: "wrapper"
+  }, react_1.default.createElement("h2", null, "Patients"), props.patients.map(function (x, i) {
+    return react_1.default.createElement(PatientItem, {
+      key: x._id,
+      name: x.name,
+      onClick: function onClick() {
+        return props.onChangeIndex(i);
+      },
+      selected: i === props.selIndex
+    });
+  }))), react_1.default.createElement("div", {
+    className: "bottom"
+  }, react_1.default.createElement(react_bootstrap_1.Button, {
+    className: "mr-2",
+    onClick: handleAddClick
+  }, "Add Patient"), react_1.default.createElement(react_bootstrap_1.Button, {
+    variant: "danger",
+    onClick: handleRemoveClick
+  }, "Remove Patient")));
+}
+
+exports.default = DashboardLeft;
+
+function PatientItem(props) {
+  function handleClick(e) {
+    e.preventDefault();
+    props.onClick();
+  }
+
+  return react_1.default.createElement("div", {
+    className: "PatientItem"
+  }, react_1.default.createElement("a", {
+    href: props.selected ? undefined : "",
+    onClick: handleClick
+  }, util_1.default.joinName(props.name)));
+}
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../util":"../src/util.ts"}],"../src/components/dashboard/DashboardRight.tsx":[function(require,module,exports) {
+"use strict";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importStar(require("react"));
+
+var react_google_maps_1 = require("@thesilican/react-google-maps");
+
+var react_bootstrap_1 = require("react-bootstrap");
+
+var api_1 = require("../../api");
+
+function DashboardRight(props) {
+  var _react_1$useState = react_1.useState(null),
+      _react_1$useState2 = _slicedToArray(_react_1$useState, 2),
+      floatMarker = _react_1$useState2[0],
+      setFloatMarker = _react_1$useState2[1];
+
+  var _react_1$useState3 = react_1.useState(false),
+      _react_1$useState4 = _slicedToArray(_react_1$useState3, 2),
+      remove = _react_1$useState4[0],
+      setRemove = _react_1$useState4[1];
+
+  var _react_1$useState5 = react_1.useState(""),
+      _react_1$useState6 = _slicedToArray(_react_1$useState5, 2),
+      search = _react_1$useState6[0],
+      setSearch = _react_1$useState6[1];
+
+  var _react_1$useState7 = react_1.useState(null),
+      _react_1$useState8 = _slicedToArray(_react_1$useState7, 2),
+      mapCenter = _react_1$useState8[0],
+      setMapCenter = _react_1$useState8[1];
+
+  react_1.useEffect(function () {
+    if (props.coordinates.length > 0 && !mapCenter) {
+      setMapCenter(props.coordinates[0]);
+    }
+
+    console.log(props.coordinates);
+  }, [props.coordinates]);
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    setSearch("");
+    api_1.API.location({
+      address: search
+    }).then(function (data) {
+      setFloatMarker(data.location);
+      setMapCenter(data.location);
+    });
+  }
+
+  function handleMapClick(coord) {
+    if (remove) {
+      setRemove(false);
+    } else {
+      setFloatMarker(coord);
+    }
+  }
+
+  function handleFloatDrag(coord) {
+    if (remove) {
+      setRemove(false);
+    }
+
+    setFloatMarker(coord);
+  }
+
+  function handleMarkerClick(index) {
+    if (!remove) return;
+    props.onRemoveMarker(index);
+  }
+
+  function handleAddButtonClick() {
+    if (!floatMarker) {
+      alert("Click on the map to add a location, or search for a location in the chat box");
+      return;
+    }
+
+    var res = prompt("How many hours has this person been at this location?");
+    var num = parseFloat(res !== null && res !== void 0 ? res : "NaN");
+
+    if (isNaN(num)) {
+      alert("Invalid number of hours");
+    } else {
+      setFloatMarker(null);
+      props.onAddMarker(Object.assign(Object.assign({}, floatMarker), {
+        weight: num
+      }));
+    }
+  }
+
+  function handleRemoveButtonClick() {
+    setRemove(!remove);
+  }
+
+  return react_1.default.createElement("div", {
+    className: "DashboardRight"
+  }, react_1.default.createElement(react_bootstrap_1.Form, {
+    inline: true,
+    className: "top",
+    onSubmit: handleSearchSubmit
+  }, react_1.default.createElement(react_bootstrap_1.Form.Control, {
+    className: "mr-2",
+    placeholder: "Search for location",
+    value: search,
+    onChange: function onChange(e) {
+      return setSearch(e.target.value);
+    }
+  }), react_1.default.createElement(react_bootstrap_1.Button, {
+    type: "submit"
+  }, "Search")), react_1.default.createElement("div", {
+    className: "wrapper"
+  }, react_1.default.createElement(react_google_maps_1.Map, {
+    zoom: 14,
+    center: mapCenter !== null && mapCenter !== void 0 ? mapCenter : undefined,
+    onClick: function onClick(m, e) {
+      return handleMapClick(e.latLng.toJSON());
+    }
+  }, floatMarker && react_1.default.createElement(react_google_maps_1.Marker, {
+    label: "?",
+    draggable: true,
+    onDragEnd: function onDragEnd(e) {
+      var _a, _b;
+
+      return handleFloatDrag((_b = (_a = e.getPosition()) === null || _a === void 0 ? void 0 : _a.toJSON()) !== null && _b !== void 0 ? _b : null);
+    },
+    position: floatMarker
+  }), props.coordinates.map(function (x, i) {
+    return react_1.default.createElement(react_google_maps_1.Marker, {
+      key: i,
+      position: x,
+      label: x.weight + "",
+      onClick: function onClick() {
+        return handleMarkerClick(i);
+      }
+    });
+  }))), react_1.default.createElement("div", {
+    className: "bottom"
+  }, react_1.default.createElement(react_bootstrap_1.Button, {
+    className: "mr-2",
+    onClick: handleAddButtonClick
+  }, "Add"), react_1.default.createElement(react_bootstrap_1.Button, {
+    onClick: handleRemoveButtonClick,
+    variant: "danger"
+  }, remove ? "Click on a marker to remove it" : "Remove")));
+}
+
+exports.default = DashboardRight;
+},{"react":"../node_modules/react/index.js","@thesilican/react-google-maps":"../node_modules/@thesilican/react-google-maps/dist/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../api":"../src/api/index.ts"}],"../src/components/dashboard/DashboardView.tsx":[function(require,module,exports) {
+"use strict";
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importStar(require("react"));
+
+var react_bootstrap_1 = require("react-bootstrap");
+
+var DashboardLeft_1 = __importDefault(require("./DashboardLeft"));
+
+var DashboardRight_1 = __importDefault(require("./DashboardRight"));
+
+var api_1 = require("../../api");
+
+var patients = [{
+  _id: "0",
+  name: {
+    first: "Bob",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "1",
+  name: {
+    first: "Joe",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "3",
+  name: {
+    first: "Jane",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "4",
+  name: {
+    first: "Bob",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "5",
+  name: {
+    first: "Joe",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "6",
+  name: {
+    first: "Jane",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "7",
+  name: {
+    first: "Bob",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "8",
+  name: {
+    first: "Joe",
+    last: "Marley"
+  },
+  locations: []
+}, {
+  _id: "9",
+  name: {
+    first: "Jane",
+    last: "Marley"
+  },
+  locations: []
+}];
+
+function DashboardView(props) {
+  var _react_1$useState = react_1.useState(0),
+      _react_1$useState2 = _slicedToArray(_react_1$useState, 2),
+      selIndex = _react_1$useState2[0],
+      setSelIndex = _react_1$useState2[1];
+
+  var _react_1$useState3 = react_1.useState(null),
+      _react_1$useState4 = _slicedToArray(_react_1$useState3, 2),
+      people = _react_1$useState4[0],
+      setPeople = _react_1$useState4[1];
+
+  var person = people ? people[selIndex] : undefined;
+  var coords = person === null || person === void 0 ? void 0 : person.locations;
+  react_1.useEffect(function () {
+    api_1.API.infectionsGet({
+      token: props.token
+    }).then(function (data) {
+      if (data.status === "invalid-token" || data.status === "invalid-id") {
+        alert("There was a problem fetching the data");
+      } else if (data.status === "ok") {
+        setPeople(data.people);
+      }
+    });
+  }, []);
+
+  function handleChangeIndex(index) {
+    setSelIndex(index);
+  }
+
+  function handleUpdateCoordinate(locations) {
+    if (!person) return;
+    api_1.API.infectionsPatch({
+      _id: person._id,
+      locations: locations,
+      token: props.token
+    }).then(function (data) {
+      if (data.status === "invalid-token" || data.status === "invalid-id") {
+        alert("There was a problem updating the data");
+      } else if (data.status === "ok") {
+        setPeople(data.people);
+      }
+    });
+  }
+
+  function handleAddCoordinate(coord) {
+    handleUpdateCoordinate(coords ? [].concat(_toConsumableArray(coords), [coord]) : [coord]);
+  }
+
+  function handleRemoveCoordinate(index) {
+    handleUpdateCoordinate(coords ? coords.filter(function (_, i) {
+      return i !== index;
+    }) : []);
+  }
+
+  function handleAddUser(name) {
+    api_1.API.infectionsPost({
+      name: name,
+      token: props.token,
+      locations: []
+    }).then(function (data) {
+      if (data.status === "invalid-token" || data.status === "invalid-id") {
+        alert("There was a problem updating the data");
+      } else if (data.status === "ok") {
+        setPeople(data.people);
+      }
+    });
+  }
+
+  function handleRemoveUser() {
+    if (!person) return;
+    api_1.API.infectionsDelete({
+      _id: person._id,
+      token: props.token
+    }).then(function (data) {
+      if (data.status === "invalid-token" || data.status === "invalid-id") {
+        alert("There was a problem updating the data");
+      } else if (data.status === "ok") {
+        setPeople(data.people);
+      }
+    });
+  }
+
+  return react_1.default.createElement(react_bootstrap_1.Container, {
+    className: "DashboardView"
+  }, react_1.default.createElement(react_bootstrap_1.Row, null, react_1.default.createElement(react_bootstrap_1.Col, {
+    sm: 12,
+    md: 4
+  }, react_1.default.createElement(DashboardLeft_1.default, {
+    hospital: props.hospital,
+    patients: people !== null && people !== void 0 ? people : [],
+    selIndex: selIndex,
+    onChangeIndex: handleChangeIndex,
+    onAddPerson: handleAddUser,
+    onRemovePerson: handleRemoveUser
+  })), react_1.default.createElement(react_bootstrap_1.Col, {
+    sm: 12,
+    md: 8
+  }, react_1.default.createElement(DashboardRight_1.default, {
+    address: props.hospital.address,
+    coordinates: coords !== null && coords !== void 0 ? coords : [],
+    onAddMarker: handleAddCoordinate,
+    onRemoveMarker: handleRemoveCoordinate
+  }))));
+}
+
+exports.default = DashboardView;
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./DashboardLeft":"../src/components/dashboard/DashboardLeft.tsx","./DashboardRight":"../src/components/dashboard/DashboardRight.tsx","../../api":"../src/api/index.ts"}],"../src/components/signup/LoginView.tsx":[function(require,module,exports) {
 "use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -49412,7 +49887,170 @@ function LoginView(props) {
 }
 
 exports.default = LoginView;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../api":"../src/api/index.ts","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../src/components/signup/SignUpView.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../../api":"../src/api/index.ts","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/use-debounce/esm/useDebouncedCallback.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useDebouncedCallback;
+
+var _react = require("react");
+
+function useDebouncedCallback(callback, delay, options) {
+  if (options === void 0) {
+    options = {};
+  }
+
+  var maxWait = options.maxWait;
+  var maxWaitHandler = (0, _react.useRef)(null);
+  var maxWaitArgs = (0, _react.useRef)([]);
+  var leading = options.leading;
+  var trailing = options.trailing === undefined ? true : options.trailing;
+  var leadingCall = (0, _react.useRef)(false);
+  var functionTimeoutHandler = (0, _react.useRef)(null);
+  var isComponentUnmounted = (0, _react.useRef)(false);
+  var debouncedFunction = (0, _react.useRef)(callback);
+  debouncedFunction.current = callback;
+  var cancelDebouncedCallback = (0, _react.useCallback)(function () {
+    clearTimeout(functionTimeoutHandler.current);
+    clearTimeout(maxWaitHandler.current);
+    maxWaitHandler.current = null;
+    maxWaitArgs.current = [];
+    functionTimeoutHandler.current = null;
+    leadingCall.current = false;
+  }, []);
+  (0, _react.useEffect)(function () {
+    // We have to set isComponentUnmounted to be truth, as fast-refresh runs all useEffects
+    isComponentUnmounted.current = false;
+    return function () {
+      // we use flag, as we allow to call callPending outside the hook
+      isComponentUnmounted.current = true;
+    };
+  }, []);
+  var debouncedCallback = (0, _react.useCallback)(function () {
+    var args = [];
+
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i] = arguments[_i];
+    }
+
+    maxWaitArgs.current = args;
+    clearTimeout(functionTimeoutHandler.current);
+
+    if (leadingCall.current) {
+      leadingCall.current = false;
+    }
+
+    if (!functionTimeoutHandler.current && leading && !leadingCall.current) {
+      debouncedFunction.current.apply(debouncedFunction, args);
+      leadingCall.current = true;
+    }
+
+    functionTimeoutHandler.current = setTimeout(function () {
+      var shouldCallFunction = true;
+
+      if (leading && leadingCall.current) {
+        shouldCallFunction = false;
+      }
+
+      cancelDebouncedCallback();
+
+      if (!isComponentUnmounted.current && trailing && shouldCallFunction) {
+        debouncedFunction.current.apply(debouncedFunction, args);
+      }
+    }, delay);
+
+    if (maxWait && !maxWaitHandler.current && trailing) {
+      maxWaitHandler.current = setTimeout(function () {
+        var args = maxWaitArgs.current;
+        cancelDebouncedCallback();
+
+        if (!isComponentUnmounted.current) {
+          debouncedFunction.current.apply(null, args);
+        }
+      }, maxWait);
+    }
+  }, [maxWait, delay, cancelDebouncedCallback, leading, trailing]);
+  var callPending = (0, _react.useCallback)(function () {
+    // Call pending callback only if we have anything in our queue
+    if (!functionTimeoutHandler.current) {
+      return;
+    }
+
+    debouncedFunction.current.apply(null, maxWaitArgs.current);
+    cancelDebouncedCallback();
+  }, [cancelDebouncedCallback]); // At the moment, we use 3 args array so that we save backward compatibility
+
+  return [debouncedCallback, cancelDebouncedCallback, callPending];
+}
+},{"react":"../node_modules/react/index.js"}],"../node_modules/use-debounce/esm/useDebounce.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useDebounce;
+
+var _react = require("react");
+
+var _useDebouncedCallback = _interopRequireDefault(require("./useDebouncedCallback"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function valueEquality(left, right) {
+  return left === right;
+}
+
+function useDebounce(value, delay, options) {
+  var eq = options && options.equalityFn ? options.equalityFn : valueEquality;
+
+  var _a = (0, _react.useState)(value),
+      state = _a[0],
+      dispatch = _a[1];
+
+  var _b = (0, _useDebouncedCallback.default)((0, _react.useCallback)(function (value) {
+    return dispatch(value);
+  }, []), delay, options),
+      callback = _b[0],
+      cancel = _b[1],
+      callPending = _b[2];
+
+  var previousValue = (0, _react.useRef)(value);
+  (0, _react.useEffect)(function () {
+    // We need to use this condition otherwise we will run debounce timer for the first render (including maxWait option)
+    if (!eq(previousValue.current, value)) {
+      callback(value);
+      previousValue.current = value;
+    }
+  }, [value, callback, eq]);
+  return [state, cancel, callPending];
+}
+},{"react":"../node_modules/react/index.js","./useDebouncedCallback":"../node_modules/use-debounce/esm/useDebouncedCallback.js"}],"../node_modules/use-debounce/esm/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "useDebounce", {
+  enumerable: true,
+  get: function () {
+    return _useDebounce.default;
+  }
+});
+Object.defineProperty(exports, "useDebouncedCallback", {
+  enumerable: true,
+  get: function () {
+    return _useDebouncedCallback.default;
+  }
+});
+
+var _useDebounce = _interopRequireDefault(require("./useDebounce"));
+
+var _useDebouncedCallback = _interopRequireDefault(require("./useDebouncedCallback"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./useDebounce":"../node_modules/use-debounce/esm/useDebounce.js","./useDebouncedCallback":"../node_modules/use-debounce/esm/useDebouncedCallback.js"}],"../src/components/signup/SignUpView.tsx":[function(require,module,exports) {
 "use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -49507,6 +50145,8 @@ var api_1 = require("../../api");
 
 var react_router_dom_1 = require("react-router-dom");
 
+var use_debounce_1 = require("use-debounce");
+
 function SignUpView(props) {
   var history = react_router_dom_1.useHistory();
 
@@ -49530,19 +50170,58 @@ function SignUpView(props) {
       password = _react_1$useState8[0],
       setPassword = _react_1$useState8[1];
 
-  function handleSubmit(e) {
+  var _react_1$useState9 = react_1.useState(null),
+      _react_1$useState10 = _slicedToArray(_react_1$useState9, 2),
+      addressMarker = _react_1$useState10[0],
+      setAddressMarker = _react_1$useState10[1];
+
+  function getAddress(address) {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var hospital, res;
+      var res;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return api_1.API.location({
+                address: address
+              });
+
+            case 2:
+              res = _context.sent;
+              setAddressMarker(res.location);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+  }
+
+  var _use_debounce_1$useDe = use_debounce_1.useDebouncedCallback(getAddress, 500),
+      _use_debounce_1$useDe2 = _slicedToArray(_use_debounce_1$useDe, 1),
+      getAddressDebounced = _use_debounce_1$useDe2[0];
+
+  function handleAddressInput(address) {
+    setAddress(address);
+    if (address !== "") getAddressDebounced(address);
+  }
+
+  function handleSubmit(e) {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var hospital, res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
               hospital = {
                 address: address,
                 name: name
               };
-              _context.next = 4;
+              _context2.next = 4;
               return api_1.API.signup({
                 email: email,
                 password: password,
@@ -49550,7 +50229,7 @@ function SignUpView(props) {
               });
 
             case 4:
-              res = _context.sent;
+              res = _context2.sent;
 
               if (res.status === "email-taken") {
                 alert("Sorry, that email has been taken");
@@ -49565,10 +50244,10 @@ function SignUpView(props) {
 
             case 6:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
   }
 
@@ -49593,11 +50272,15 @@ function SignUpView(props) {
     required: true,
     value: address,
     onChange: function onChange(e) {
-      return setAddress(e.target.value);
+      return handleAddressInput(e.target.value);
     }
   }), react_1.default.createElement("div", {
     className: "map-wrapper"
-  }, react_1.default.createElement(react_google_maps_1.Map, null))), react_1.default.createElement(react_bootstrap_1.Form.Group, null, react_1.default.createElement(react_bootstrap_1.Form.Label, null, "Email address"), react_1.default.createElement(react_bootstrap_1.Form.Control, {
+  }, react_1.default.createElement(react_google_maps_1.Map, {
+    center: addressMarker !== null && addressMarker !== void 0 ? addressMarker : undefined
+  }, addressMarker ? react_1.default.createElement(react_google_maps_1.Marker, {
+    position: addressMarker
+  }) : null))), react_1.default.createElement(react_bootstrap_1.Form.Group, null, react_1.default.createElement(react_bootstrap_1.Form.Label, null, "Email address"), react_1.default.createElement(react_bootstrap_1.Form.Control, {
     required: true,
     value: email,
     onChange: function onChange(e) {
@@ -49619,7 +50302,7 @@ function SignUpView(props) {
 }
 
 exports.default = SignUpView;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","@thesilican/react-google-maps":"../node_modules/@thesilican/react-google-maps/dist/index.js","../../api":"../src/api/index.ts","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../src/App.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","@thesilican/react-google-maps":"../node_modules/@thesilican/react-google-maps/dist/index.js","../../api":"../src/api/index.ts","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","use-debounce":"../node_modules/use-debounce/esm/index.js"}],"../src/App.tsx":[function(require,module,exports) {
 "use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -49730,7 +50413,12 @@ function App() {
     path: "/map"
   }, react_1.default.createElement(HeatMapView_1.default, null)), react_1.default.createElement(react_router_dom_1.Route, {
     path: "/dashboard"
-  }, react_1.default.createElement(DashboardView_1.default, null)), react_1.default.createElement(react_router_dom_1.Route, {
+  }, login ? react_1.default.createElement(DashboardView_1.default, {
+    token: login.token,
+    hospital: login.hospital
+  }) : react_1.default.createElement(react_router_dom_1.Redirect, {
+    to: "login"
+  })), react_1.default.createElement(react_router_dom_1.Route, {
     path: "/login"
   }, react_1.default.createElement(LoginView_1.default, {
     onLogin: handleLogin

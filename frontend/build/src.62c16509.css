@@ -9917,7 +9917,7 @@ body,
   margin-top: 1rem;
   position: relative;
   width: 100%;
-  height: 10rem;
+  height: 20rem;
 }
 
 .LoginView .form {
@@ -9931,7 +9931,7 @@ body,
   position: absolute;
   left: 1rem;
   bottom: 2rem;
-  width: 10rem;
+  width: 12rem;
   background-color: #ffffff;
   padding: 1rem;
   text-align: center;

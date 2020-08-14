@@ -1,38 +1,64 @@
-import { HeatMap, Map, Marker } from "@thesilican/react-google-maps";
-import React from "react";
+import {
+  HeatMap,
+  Map,
+  Marker,
+  WeightedCoordinate,
+  Coordinate,
+} from "@thesilican/react-google-maps";
+import React, { useState, useEffect } from "react";
+import { API } from "../../api";
+import Util from "../../util";
 
 type HeatMapViewProps = {};
 
-const data = [
-  { lat: 37.782, lng: -122.447 },
-  { lat: 37.782, lng: -122.445 },
-  { lat: 37.782, lng: -122.443 },
-  { lat: 37.782, lng: -122.441 },
-  { lat: 37.782, lng: -122.439 },
-  { lat: 37.782, lng: -122.437 },
-  { lat: 37.782, lng: -122.435 },
-  { lat: 37.785, lng: -122.447 },
-  { lat: 37.785, lng: -122.445 },
-  { lat: 37.785, lng: -122.443 },
-  { lat: 37.785, lng: -122.441 },
-  { lat: 37.785, lng: -122.439 },
-  { lat: 37.785, lng: -122.437 },
-  { lat: 37.785, lng: -122.435 },
-];
-
 export default function HeatMapView(props: HeatMapViewProps) {
+  const [floatMarker, setFloatMarker] = useState(null as Coordinate | null);
+  const [data, setData] = useState(null as WeightedCoordinate[] | null);
+  const center = data ? data[0] : undefined;
+  const infectionChance =
+    floatMarker && data ? Util.getInfectionChance(floatMarker, data) : null;
+  useEffect(() => {
+    API.heatmap().then((data) => {
+      setData(data.locations);
+    });
+  }, []);
+  function handleMapClick(coord: Coordinate) {
+    setFloatMarker(coord);
+  }
+  function handleFloatDrag(coord: Coordinate | null) {
+    setFloatMarker(coord);
+  }
+
   return (
     <div className="HeatMapView">
-      <Map zoom={14}>
-        <HeatMap data={data} />
-        <Marker position={{ lat: 37.785, lng: -122.439 }} />
+      <Map
+        center={center}
+        zoom={14}
+        onClick={(m, e) => handleMapClick(e.latLng.toJSON())}
+      >
+        <HeatMap data={data ?? []} radius={15} />
+        {floatMarker && (
+          <Marker
+            position={floatMarker}
+            draggable
+            onDragEnd={(m) =>
+              handleFloatDrag(m.getPosition()?.toJSON() ?? null)
+            }
+          />
+        )}
       </Map>
       <div className="controls">
-        <span>
-          Infection Chance:
-          <br />
-          <span className={"lg"}>100%</span>
-        </span>
+        {floatMarker ? (
+          <span>
+            Infection Chance:
+            <br />
+            <span className={"lg"}>
+              {((infectionChance ?? -1) * 100).toFixed(0)}%
+            </span>
+          </span>
+        ) : (
+          <span>Click on the map to see how dangerous different spots are</span>
+        )}
       </div>
     </div>
   );

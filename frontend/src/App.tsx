@@ -39,7 +39,11 @@ export default function App() {
               <HeatMapView />
             </Route>
             <Route path="/dashboard">
-              <DashboardView />
+              {login ? (
+                <DashboardView token={login.token} hospital={login.hospital} />
+              ) : (
+                <Redirect to="login" />
+              )}
             </Route>
             <Route path="/login">
               <LoginView onLogin={handleLogin} />

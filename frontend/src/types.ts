@@ -7,7 +7,7 @@ export type Name = {
 
 export type Person = {
   name: Name;
-  id: string;
+  _id: string;
   locations: WeightedCoordinate[];
 };
 
