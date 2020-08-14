@@ -1,1 +1,125 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+$sp-1: map-get($spacers, 1);
+$sp-2: map-get($spacers, 2);
+$sp-3: map-get($spacers, 3);
+$sp-4: map-get($spacers, 4);
+$sp-5: map-get($spacers, 5);
+
+$f-md: $font-size-base;
+$f-sm: $font-size-sm;
+$f-lg: $font-size-lg;
+$f-h1: $h1-font-size;
+$f-h2: $h2-font-size;
+$f-h3: $h3-font-size;
+$f-h4: $h4-font-size;
+$f-h5: $h5-font-size;
+$f-h6: $h6-font-size;
+
+html,
+body,
+#root {
+  height: 100vh;
+}
+
+.App {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.HomeView {
+  padding: $sp-3;
+  text-align: center;
+}
+
+.SignUpView {
+  .form {
+    padding: $sp-3 0;
+  }
+  .map-wrapper {
+    margin-top: $sp-3;
+    position: relative;
+    width: 100%;
+    height: $sp-3 * 10;
+  }
+}
+
+.LoginView {
+  .form {
+    padding: $sp-3 0;
+  }
+}
+
+.HeatMapView {
+  position: relative;
+  .controls {
+    position: absolute;
+    left: $sp-3;
+    bottom: $sp-3 * 2;
+    width: $sp-3 * 10;
+    background-color: #ffffff;
+
+    padding: $sp-3;
+    text-align: center;
+    .lg {
+      font-size: $f-h3;
+    }
+  }
+}
+
+.DashboardView {
+  .row,
+  .col {
+    height: 100%;
+  }
+  padding: $sp-3;
+}
+
+.DashboardLeft {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  .patients {
+    position: relative;
+    h2 {
+      position: sticky;
+      top: 0;
+      background-color: white;
+    }
+
+    .wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow-y: auto;
+    }
+  }
+  .bottom {
+    padding: $sp-2 0;
+  }
+}
+.PatientItem {
+  padding: $sp-2;
+  font-size: $f-lg;
+}
+.DashboardRight {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  .top {
+    padding: $sp-2 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: $sp-2;
+  }
+  .wrapper {
+    position: relative;
+  }
+  .bottom {
+    padding: $sp-2 0;
+  }
+}
