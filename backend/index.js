@@ -12,7 +12,7 @@ app.use('/api', apiRoute);
 
 //main routes
 app.get("*", async (req, res) => {
-  res.sendFile(path.join(__dirname, " ../frontend/build/index.html", "utf-8"));
+  res.sendFile(path.join(__dirname, " ../frontend/build/index.html"), "utf-8");
 });
 
 
