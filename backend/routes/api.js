@@ -24,18 +24,25 @@ router.get("/heatmap", async (req, res)=>{
 })
 
 router.get("/infections", async (req, res)=>{
+    //validate token
+    if(await validToken(req.query.token) == false){
+        res.status(400).json({
+            status: "invalid-token"
+        })
+        return;
+    }
+
     let docs = await PersonSchema.find();
 
     res.json({
-        people: docs
+        people: docs,
+        status: "ok"
     })
 })
 
 router.post("/infections", async(req, res)=>{
     //validate token
-    let doc = await HospitalSchema.findOne({token: req.body.token});
-    //if invalid token
-    if(doc == null){
+    if(await validToken(req.body.token) == false){
         res.status(400).json({
             status: "invalid-token"
         })
@@ -68,11 +75,15 @@ router.post("/infections", async(req, res)=>{
 })
 
 router.patch('/infections', async(req, res)=>{
-    //check for person with matching id
-    let doc = await PersonSchema.findById(req.body.id);
+    //validate token and ID
+    if(await validToken(req.body.token) == false){
+        res.status(400).json({
+            status: "invalid-token"
+        })
+        return;
+    }
 
-    //if invalid id
-    if(doc == null){
+    if(await validId(req.body.id) == false){
         res.status(400).json({
             status: "invalid-id"
         })
@@ -80,8 +91,7 @@ router.patch('/infections', async(req, res)=>{
     }
 
 
-
-    //if valid id, update person
+    //IF ALL VALID
     const update = {
         locations: req.body.locations
     }
@@ -99,29 +109,26 @@ router.patch('/infections', async(req, res)=>{
 })
 
 router.delete('/infections', async(req, res)=>{
-    //check for person with matching id
-    //note: if ID string is wrong length, program will error, so try-catch needed
-    let doc = null
-    try{
-        doc = await PersonSchema.findById(req.body.id, (err, d)=>{
-            
-        });
-    } catch(e){
+    //check for valid ID and token
+
+    if(await validToken(req.body.token) == false){
+        res.status(400).json({
+            status: "invalid-token"
+        })
+        return;
+    }
+   
+
+    if(await validId(req.body.id) == false){
         res.status(400).json({
             status: "invalid-id"
         })
         return;
     }
 
-    //if invalid id
-    if(doc == null){
-        res.status(400).json({
-            status: "invalid-id"
-        })
-        return;
-    }
+   
 
-    //if valid id
+    //IF ALL VALID
     await PersonSchema.findByIdAndDelete(req.body.id);
 
     //send all people
@@ -232,5 +239,32 @@ router.get('/location', (req, res)=>{
 
 
 })
+
+
+////////////////////////////////////////////////////////Helper functions
+async function validToken(tk){
+    //validate token
+    let doc = await HospitalSchema.findOne({token: tk});
+    //if invalid token
+    if(doc == null){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+async function validId(id){
+    let doc = null
+    try{
+        doc = await PersonSchema.findById(id);
+    } catch(e){
+        return false;
+    }
+
+    if(doc == null){
+        return false;
+    }
+}
 
 module.exports = router;
