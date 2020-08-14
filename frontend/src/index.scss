@@ -66,6 +66,21 @@ body,
       font-size: $f-h3;
     }
   }
+  .controls.safe {
+    color: white;
+    background-color: $success;
+  }
+  .controls.moderate {
+    background-color: $warning;
+  }
+  .controls.dangerous {
+    color: white;
+    background-color: $danger;
+  }
+  .controls.highlydangerous {
+    color: white;
+    background-color: $danger;
+  }
 }
 
 .DashboardView {

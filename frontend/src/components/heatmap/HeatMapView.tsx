@@ -33,31 +33,38 @@ export default function HeatMapView(props: HeatMapViewProps) {
     <div className="HeatMapView">
       <Map
         center={center}
-        zoom={14}
+        zoom={16}
         onClick={(m, e) => handleMapClick(e.latLng.toJSON())}
       >
         <HeatMap data={data ?? []} radius={15} />
         {floatMarker && (
-          <Marker
-            position={floatMarker}
-            draggable
-            onDragEnd={(m) =>
-              handleFloatDrag(m.getPosition()?.toJSON() ?? null)
-            }
-          />
+          <>
+            <Marker
+              position={floatMarker}
+              draggable
+              onDragEnd={(m) =>
+                handleFloatDrag(m.getPosition()?.toJSON() ?? null)
+              }
+            />
+          </>
         )}
       </Map>
-      <div className="controls">
-        {floatMarker ? (
+      <div
+        className={
+          "controls " +
+          (infectionChance ? infectionChance[1].replace(" ", "") : "")
+        }
+      >
+        {floatMarker && infectionChance ? (
           <span>
-            Infection Chance:
+            Rating:
             <br />
-            <span className={"lg"}>
-              {((infectionChance ?? -1) * 100).toFixed(0)}%
-            </span>
+            <span className={"lg"}>{infectionChance[1]}</span>
+            <br />
+            <span>{infectionChance[0].toFixed(1)} infection points</span>
           </span>
         ) : (
-          <span>Click on the map to see how dangerous different spots are</span>
+          <span>Click on the map to see where the COVID hot spots are</span>
         )}
       </div>
     </div>
