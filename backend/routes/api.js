@@ -83,7 +83,7 @@ router.patch('/infections', async(req, res)=>{
         return;
     }
 
-    if(await validId(req.body.id) == false){
+    if(await validId(req.body._id) == false){
         res.status(400).json({
             status: "invalid-id"
         })
@@ -96,7 +96,7 @@ router.patch('/infections', async(req, res)=>{
         locations: req.body.locations
     }
 
-    await PersonSchema.findByIdAndUpdate(req.body.id, update);
+    await PersonSchema.findByIdAndUpdate(req.body._id, update);
 
     //send all people
     let docs = await PersonSchema.find();
@@ -119,7 +119,7 @@ router.delete('/infections', async(req, res)=>{
     }
    
 
-    if(await validId(req.body.id) == false){
+    if(await validId(req.body._id) == false){
         res.status(400).json({
             status: "invalid-id"
         })
@@ -129,7 +129,7 @@ router.delete('/infections', async(req, res)=>{
    
 
     //IF ALL VALID
-    await PersonSchema.findByIdAndDelete(req.body.id);
+    await PersonSchema.findByIdAndDelete(req.body._id);
 
     //send all people
     let docs = await PersonSchema.find();
