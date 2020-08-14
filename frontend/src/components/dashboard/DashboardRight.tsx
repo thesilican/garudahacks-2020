@@ -110,7 +110,7 @@ export default function DashboardRight(props: DashboardRightProps) {
       </div>
       <div className="bottom">
         <Button className="mr-2" onClick={handleAddButtonClick}>
-          Add
+          {floatMarker ? "Set hours & confirm" : "Add new location"}
         </Button>
         <Button onClick={handleRemoveButtonClick} variant="danger">
           {remove ? "Click on a marker to remove it" : "Remove"}

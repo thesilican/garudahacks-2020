@@ -92,7 +92,7 @@ export default function SignUpView(props: SignUpViewProps) {
                 onChange={(e) => setPassword(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Button type="submit">Log in</Button>
+            <Button type="submit">Sign up</Button>
           </Form>
         </Col>
         <Col md={3} lg={4}></Col>
