@@ -1,13 +1,28 @@
 const express = require("express");
 const fs = require("fs").promises;
+const apiRoute = require('./routes/api')
+const mongoose = require("mongoose");
+
 
 const app = express();
 app.use(express.json());
 app.use("/", express.static("../frontend/build"));
+app.use('/api', apiRoute);
 
-app.get("/", async (req, res) => {
+
+//main routes
+app.get("*", async (req, res) => {
   res.sendFile("../frontend/build/index.html", "utf-8");
 });
+
+
+
+mongoose.connect("mongodb+srv://testboy:testboy@rest.tmyts.mongodb.net/Garuda?retryWrites=true&w=majority", 
+{ useUnifiedTopology: true , useNewUrlParser: true }, ()=>{
+  console.log("Connected to DB");
+})
+
+
 app.listen(3000, () => {
   console.log("Listening on port 3000...");
 });
