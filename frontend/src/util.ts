@@ -41,9 +41,9 @@ const Util = {
     }
     if (sum < 1) {
       return [sum, "safe"];
-    } else if (sum < 3) {
+    } else if (sum < 5) {
       return [sum, "moderate"];
-    } else if (sum < 7) {
+    } else if (sum < 10) {
       return [sum, "dangerous"];
     } else {
       return [sum, "highly dangerous"];
