@@ -259,7 +259,7 @@ router.get('/reversegeo', (req, res) =>{
     let lng = req.query.lng;
     let url = "/v1/revgeocode?at=";
 
-    url = url + lat + "%2C" + lng + "&lang=en-US&apiKey=KNZWFFoClzG0wis5_O7aAkXvzq0mPctnnKuQ2ubQhuM";
+    url = url + lat + "%2C" + lng + "&lang=en-US&apiKey=NX9WsJbIOfv1XoD0GZVgmgQphrSWBBrlOPU4WxSKxAE";
     url = "https://revgeocode.search.hereapi.com" + url;
 
     //console.log(url);
@@ -298,7 +298,7 @@ router.get('/discover', (req, res) =>{
     let search = req.query.search;
     let url = "https://discover.search.hereapi.com/v1/discover?at=";
 
-    url = url + lat + "," + lng + "&lang=en-US&apiKey=KNZWFFoClzG0wis5_O7aAkXvzq0mPctnnKuQ2ubQhuM&q=" + search;
+    url = url + lat + "," + lng + "&lang=en-US&apiKey=NX9WsJbIOfv1XoD0GZVgmgQphrSWBBrlOPU4WxSKxAE&q=" + search;
 
 
     console.log(url);
