@@ -1,16 +1,15 @@
 import {
+  Circle,
+  Coordinate,
   HeatMap,
   Map,
   Marker,
   WeightedCoordinate,
-  Coordinate,
-  Circle,
 } from "@thesilican/react-google-maps";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 import { API } from "../../api";
 import Util from "../../util";
-import { Form } from "react-bootstrap";
-import { useDebouncedCallback } from "use-debounce/lib";
 
 type HeatMapViewProps = {};
 

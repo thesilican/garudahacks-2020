@@ -1,14 +1,14 @@
-import React, { useState, useMemo } from "react";
-import { Map, Google } from "@thesilican/react-google-maps";
-import HomeView from "./components/home/HomeView";
-import TopNavBar from "./components/TopNavBar";
-import HeatMapView from "./components/heatmap/HeatMapView";
+import { Google } from "@thesilican/react-google-maps";
+import React, { useState } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import AboutView from "./components/about/AboutView";
 import DashboardView from "./components/dashboard/DashboardView";
+import HeatMapView from "./components/heatmap/HeatMapView";
+import HomeView from "./components/home/HomeView";
 import LoginView from "./components/signup/LoginView";
 import SignUpView from "./components/signup/SignUpView";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import TopNavBar from "./components/TopNavBar";
 import { LoginState } from "./types";
-import AboutView from "./components/about/AboutView";
 
 function loginStore(): LoginState | null {
   const res = window.localStorage.getItem("login");

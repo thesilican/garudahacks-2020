@@ -1,90 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import { WeightedCoordinate } from "@thesilican/react-google-maps";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { API } from "../../api";
+import { Hospital, Name, Person } from "../../types";
 import DashboardLeft from "./DashboardLeft";
 import DashboardRight from "./DashboardRight";
-import { Person, Name, Hospital } from "../../types";
-import { API } from "../../api";
-import { WeightedCoordinate, Coordinate } from "@thesilican/react-google-maps";
 
 type DashboardViewProps = {
   hospital: Hospital;
   token: string;
 };
-
-const patients: Person[] = [
-  {
-    _id: "0",
-    name: {
-      first: "Bob",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "1",
-    name: {
-      first: "Joe",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "3",
-    name: {
-      first: "Jane",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "4",
-    name: {
-      first: "Bob",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "5",
-    name: {
-      first: "Joe",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "6",
-    name: {
-      first: "Jane",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "7",
-    name: {
-      first: "Bob",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "8",
-    name: {
-      first: "Joe",
-      last: "Marley",
-    },
-    locations: [],
-  },
-  {
-    _id: "9",
-    name: {
-      first: "Jane",
-      last: "Marley",
-    },
-    locations: [],
-  },
-];
 
 export default function DashboardView(props: DashboardViewProps) {
   const [selIndex, setSelIndex] = useState(0);

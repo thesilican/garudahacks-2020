@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import logo from "../../../assets/logo.png";
+import { Col, Container, Row } from "react-bootstrap";
 import about1 from "../../../assets/about1.png";
 import about2 from "../../../assets/about2.png";
+import logo from "../../../assets/logo.png";
 
 type AboutViewProps = {};
 

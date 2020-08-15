@@ -1,5 +1,5 @@
 import { Coordinate, WeightedCoordinate } from "@thesilican/react-google-maps";
-import { Hospital, Person, Name } from "../types";
+import { Hospital, Name, Person } from "../types";
 
 export type SignupParams = {
   hospital: Hospital;

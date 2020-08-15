@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Form, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router-dom";
-import { LoginState } from "../types";
 import logo from "../../assets/logo.png";
+import { LoginState } from "../types";
 
 type TopNavBarProps = {
   login: LoginState | null;

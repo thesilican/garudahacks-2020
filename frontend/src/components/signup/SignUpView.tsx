@@ -1,10 +1,10 @@
+import { Coordinate, Map, Marker } from "@thesilican/react-google-maps";
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Map, Coordinate, Marker } from "@thesilican/react-google-maps";
-import { API } from "../../api";
-import { LoginState } from "../../types";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
+import { API } from "../../api";
+import { LoginState } from "../../types";
 
 type SignUpViewProps = {
   onLogin: (info: LoginState) => void;

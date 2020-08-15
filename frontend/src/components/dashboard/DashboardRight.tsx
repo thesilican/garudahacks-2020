@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
 import {
-  Map,
   Coordinate,
-  Marker,
-  WeightedCoordinate,
   DefaultCoordinate,
+  Map,
+  Marker,
+  WeightedCoordinate
 } from "@thesilican/react-google-maps";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { API } from "../../api";
 

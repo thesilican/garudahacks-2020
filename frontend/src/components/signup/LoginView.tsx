@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Form, Container, Row, Col, Button } from "react-bootstrap";
-import { LoginParams, API } from "../../api";
-import { LoginState } from "../../types";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { API } from "../../api";
+import { LoginState } from "../../types";
 
 type LoginViewProps = {
   onLogin: (info: LoginState) => void;

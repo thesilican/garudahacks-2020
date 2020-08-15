@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Person, Name, Hospital } from "../../types";
+import { Hospital, Name, Person } from "../../types";
 import Util from "../../util";
 
 type DashboardLeftProps = {

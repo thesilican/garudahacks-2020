@@ -1,5 +1,5 @@
+import { Coordinate, WeightedCoordinate } from "@thesilican/react-google-maps";
 import { Name } from "./types";
-import { WeightedCoordinate, Coordinate } from "@thesilican/react-google-maps";
 
 type InfectionRating = "safe" | "moderate" | "dangerous" | "highly dangerous";
 
