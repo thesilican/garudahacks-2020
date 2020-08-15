@@ -14,8 +14,11 @@ const PersonSchema = mongoose.Schema({
         }
     },
 
-    locations: [mongoose.Schema.Types.Mixed]
-    
+    locations: [mongoose.Schema.Types.Mixed],
+    hospitalToken: {
+        type: String,
+        required: true
+    }
     
 });
 

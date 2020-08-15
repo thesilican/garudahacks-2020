@@ -32,7 +32,10 @@ router.get("/infections", async (req, res)=>{
         return;
     }
 
-    let docs = await PersonSchema.find();
+    
+
+
+    let docs = await PersonSchema.find({hospitalToken: req.query.token});
 
     res.json({
         people: docs,
@@ -56,7 +59,8 @@ router.post("/infections", async(req, res)=>{
             last: req.body.name.last
         },
 
-        locations: req.body.locations
+        locations: req.body.locations,
+        hospitalToken: req.body.token
     })
 
     newPerson.save(async (err)=>{
@@ -65,7 +69,7 @@ router.post("/infections", async(req, res)=>{
             return;
         }
 
-        const peopleList = await PersonSchema.find();
+        const peopleList = await PersonSchema.find({hospitalToken: req.body.token});
         res.json({
             status: "ok",
             people:  peopleList
@@ -99,7 +103,7 @@ router.patch('/infections', async(req, res)=>{
     await PersonSchema.findByIdAndUpdate(req.body._id, update);
 
     //send all people
-    let docs = await PersonSchema.find();
+    let docs = await PersonSchema.find({hospitalToken: req.body.token});
 
     res.json({
         status: "ok",
@@ -132,7 +136,7 @@ router.delete('/infections', async(req, res)=>{
     await PersonSchema.findByIdAndDelete(req.body._id);
 
     //send all people
-    let docs = await PersonSchema.find();
+    let docs = await PersonSchema.find({hospitalToken: req.body.token});
 
     res.json({
         status: "ok",
