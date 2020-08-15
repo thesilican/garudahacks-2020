@@ -4,6 +4,7 @@ import {
   Coordinate,
   Marker,
   WeightedCoordinate,
+  DefaultCoordinate,
 } from "@thesilican/react-google-maps";
 import { Button, Form } from "react-bootstrap";
 import { API } from "../../api";
@@ -21,17 +22,23 @@ export default function DashboardRight(props: DashboardRightProps) {
   const [search, setSearch] = useState("");
   const [mapCenter, setMapCenter] = useState(null as Coordinate | null);
   useEffect(() => {
-    if (props.coordinates.length > 0 && !mapCenter) {
+    if (!mapCenter && props.coordinates.length > 0) {
       setMapCenter(props.coordinates[0]);
     }
     console.log(props.coordinates);
   }, [props.coordinates]);
+  console.log(mapCenter);
   function handleSearchSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSearch("");
-    API.location({ address: search }).then((data) => {
-      setFloatMarker(data.location);
-      setMapCenter(data.location);
+    const location = props.coordinates[0] ?? mapCenter ?? DefaultCoordinate;
+    API.discover({ location, search }).then((data) => {
+      const place = data.places[0];
+      if (place) {
+        console.log(place.position);
+        setFloatMarker(place.position);
+        setMapCenter(place.position);
+      }
     });
   }
   function handleMapClick(coord: Coordinate) {
@@ -86,7 +93,10 @@ export default function DashboardRight(props: DashboardRightProps) {
         <Map
           zoom={14}
           center={mapCenter ?? undefined}
-          onClick={(m, e) => handleMapClick(e.latLng.toJSON())}
+          onClick={(m, e) => {
+            e.stop();
+            handleMapClick(e.latLng.toJSON());
+          }}
         >
           {floatMarker && (
             <Marker

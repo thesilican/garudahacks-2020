@@ -12,12 +12,6 @@ type TopNavBarProps = {
 export default function TopNavBar(props: TopNavBarProps) {
   const history = useHistory();
   const location = useLocation();
-  function handleLoginClick() {
-    history.push("/login");
-  }
-  function handleSignupClick() {
-    history.push("/signup");
-  }
   function handleLogoutClick() {
     props.onLogout();
     history.push("/");
@@ -48,10 +42,21 @@ export default function TopNavBar(props: TopNavBarProps) {
           <Nav.Link href="/map">Map</Nav.Link>
           <Nav.Link href="/dashboard">Dashboard</Nav.Link>
         </Nav>
-        <Nav>
-          <Nav.Link href="/login">Login</Nav.Link>
-          <Nav.Link href="/signup">Signup</Nav.Link>
-        </Nav>
+        {props.login ? (
+          <Nav>
+            <Navbar.Text>
+              <small>Signed in as {props.login.hospital.name}</small>
+            </Navbar.Text>
+            <Nav.Link href="" onClick={handleLogoutClick}>
+              Logout
+            </Nav.Link>
+          </Nav>
+        ) : (
+          <Nav>
+            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/signup">Signup</Nav.Link>
+          </Nav>
+        )}
         {/* {props.login ? (
           <Form inline>
             <Navbar.Text className="mr-3">

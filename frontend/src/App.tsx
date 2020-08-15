@@ -8,6 +8,7 @@ import LoginView from "./components/signup/LoginView";
 import SignUpView from "./components/signup/SignUpView";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { LoginState } from "./types";
+import AboutView from "./components/about/AboutView";
 
 function loginStore(): LoginState | null {
   const res = window.localStorage.getItem("login");
@@ -34,6 +35,9 @@ export default function App() {
           <Switch>
             <Route exact path="/">
               <HomeView />
+            </Route>
+            <Route path="/about">
+              <AboutView />
             </Route>
             <Route path="/map">
               <HeatMapView />

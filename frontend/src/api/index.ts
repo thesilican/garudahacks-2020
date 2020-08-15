@@ -34,7 +34,23 @@ export type LocationParams = {
   address: string;
 };
 export type LocationResponse = {
+  location: Coordinate | null;
+};
+export type DiscoverParams = {
   location: Coordinate;
+  search: string;
+};
+export type DiscoverResponse = {
+  places: {
+    address: string;
+    position: Coordinate;
+  }[];
+};
+export type ReverseGeoParams = {
+  location: Coordinate;
+};
+export type ReverseGeoResponse = {
+  address: string | null;
 };
 
 export type InfectionsGetParams = {
@@ -135,5 +151,20 @@ export const API = {
     const res = await window.fetch(url);
     const data = await res.json();
     return data! as LocationResponse;
+  },
+  async discover(params: DiscoverParams) {
+    const search = encodeURIComponent(params.search);
+    const { lat, lng } = params.location;
+    const url = `/api/discover?search=${search}&lat=${lat}&lng=${lng}`;
+    const res = await window.fetch(url);
+    const data = await res.json();
+    return data! as DiscoverResponse;
+  },
+  async reversegeo(params: ReverseGeoParams) {
+    const { lat, lng } = params.location;
+    const url = `/api/reversegeo?lat=${lat}&lng=${lng}`;
+    const res = await window.fetch(url);
+    const data = await res.json();
+    return data! as ReverseGeoResponse;
   },
 };

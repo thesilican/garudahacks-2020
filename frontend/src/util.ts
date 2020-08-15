@@ -7,17 +7,36 @@ const Util = {
   joinName(name: Name) {
     return name.first + " " + name.last;
   },
+  getDistance(loc1: Coordinate, loc2: Coordinate) {
+    // https://stackoverflow.com/questions/639695/how-to-convert-latitude-or-longitude-to-meters
+    const { lat: lat1, lng: lon1 } = loc1;
+    const { lat: lat2, lng: lon2 } = loc2;
+    var R = 6378.137; // Radius of earth in KM
+    var dLat = (lat2 * Math.PI) / 180 - (lat1 * Math.PI) / 180;
+    var dLon = (lon2 * Math.PI) / 180 - (lon1 * Math.PI) / 180;
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d * 1000; // meters
+  },
   getInfectionChance(
     location: Coordinate,
     infections: WeightedCoordinate[]
   ): [number, InfectionRating] {
     let sum = 0;
     for (const inf of infections) {
-      const dist = Math.hypot(inf.lat - location.lat, inf.lng - location.lng);
-      if (dist < 0.0002) {
-        sum += Math.sqrt(inf.weight) * 2;
-      } else if (dist < 0.002) {
-        sum += Math.sqrt(inf.weight) / 5;
+      const dist = Util.getDistance(inf, location);
+      if (dist < 10) {
+        sum += Math.sqrt(inf.weight) * 10;
+      } else if (dist < 25) {
+        sum += Math.sqrt(inf.weight);
+      } else if (dist < 100) {
+        sum += Math.sqrt(inf.weight) / 10;
       }
     }
     if (sum < 1) {
@@ -29,6 +48,11 @@ const Util = {
     } else {
       return [sum, "highly dangerous"];
     }
+  },
+  isIconMouseEvent(
+    e: google.maps.MouseEvent | google.maps.IconMouseEvent
+  ): e is google.maps.IconMouseEvent {
+    return "placeId" in e;
   },
 };
 

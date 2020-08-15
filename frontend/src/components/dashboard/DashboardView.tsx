@@ -151,27 +151,29 @@ export default function DashboardView(props: DashboardViewProps) {
   }
 
   return (
-    <Container className="DashboardView">
-      <Row>
-        <Col sm={12} md={4}>
-          <DashboardLeft
-            hospital={props.hospital}
-            patients={people ?? []}
-            selIndex={selIndex}
-            onChangeIndex={handleChangeIndex}
-            onAddPerson={handleAddUser}
-            onRemovePerson={handleRemoveUser}
-          />
-        </Col>
-        <Col sm={12} md={8}>
-          <DashboardRight
-            address={props.hospital.address}
-            coordinates={coords ?? []}
-            onAddMarker={handleAddCoordinate}
-            onRemoveMarker={handleRemoveCoordinate}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <div className="DashboardView">
+      <Container>
+        <Row>
+          <Col sm={12} md={4}>
+            <DashboardLeft
+              hospital={props.hospital}
+              patients={people ?? []}
+              selIndex={selIndex}
+              onChangeIndex={handleChangeIndex}
+              onAddPerson={handleAddUser}
+              onRemovePerson={handleRemoveUser}
+            />
+          </Col>
+          <Col sm={12} md={8}>
+            <DashboardRight
+              address={props.hospital.address}
+              coordinates={coords ?? []}
+              onAddMarker={handleAddCoordinate}
+              onRemoveMarker={handleRemoveCoordinate}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }

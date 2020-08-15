@@ -16,7 +16,7 @@ export default function DashboardLeft(props: DashboardLeftProps) {
   function handleAddClick() {
     const text = prompt("What is the name of your patient?")?.split(" ");
     if (!text || text.length < 2) {
-      alert("That is not a valid name");
+      alert("Your name must have a first and last name");
       return;
     }
     const name = {
