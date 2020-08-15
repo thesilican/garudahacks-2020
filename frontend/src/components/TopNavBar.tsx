@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form, Nav, Navbar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { LoginState } from "../types";
+import logo from "../../assets/logo.png";
 
 type TopNavBarProps = {
   login: LoginState | null;
@@ -23,7 +24,16 @@ export default function TopNavBar(props: TopNavBarProps) {
 
   return (
     <Navbar className="TopNavBar" variant="dark" bg="dark" sticky="top">
-      <Navbar.Brand href="/">APPNAME</Navbar.Brand>
+      <Navbar.Brand href="/">
+        <img
+          src={logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+          alt="React Bootstrap logo"
+        />{" "}
+        Hot Spot
+      </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="mr-auto">

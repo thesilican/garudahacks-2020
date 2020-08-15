@@ -1,3 +1,4 @@
+$enable-responsive-font-sizes: true;
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 $sp-1: map-get($spacers, 1);
@@ -28,9 +29,139 @@ body,
   grid-template-rows: auto 1fr;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .HomeView {
-  padding: $sp-3;
-  text-align: center;
+  overflow: auto;
+  .animate-fade {
+    animation: fadeIn 3s linear;
+  }
+  .animate-down {
+    animation: fadeInDown 2s linear;
+  }
+  .section-1 {
+    position: relative;
+    padding-top: $sp-3 * 2;
+    height: 100%;
+    text-align: center;
+    .subtitle {
+      font-size: $f-h2;
+    }
+    .back {
+      position: absolute;
+      top: -10px;
+      bottom: -50%;
+      left: 0px;
+      right: 0px;
+      background-color: $gray-100;
+      // background-image: url("../assets/background.png");
+      // background-size: cover;
+      // background-position-y: center;
+      // filter: blur(10px) contrast(50%) brightness(150%);
+      z-index: -3;
+    }
+    // background-color: white;
+    backdrop-filter: blur(10px);
+  }
+
+  .section-2 {
+    z-index: 1;;
+    margin-top: $sp-3 * 5;
+    margin-bottom: $sp-3 * 2;
+    padding: $sp-3 * 5 $sp-3;
+    position: relative;
+    .content {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: $sp-3;
+
+      color: white;
+    }
+    .back-top {
+      position: absolute;
+      top: -$sp-3 * 5;
+      bottom: 50%;
+      left: 0;
+      right: 0;
+      z-index: -2;
+      // background-color: $white;
+    }
+    .back-bot {
+      position: absolute;
+      top: 50%;
+      bottom: -$sp-3 * 2;
+      left: 0;
+      right: 0;
+      z-index: -2;
+      // background-color: $gray-200;
+    }
+    .skew {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      background-color: #00a9dd;
+      transform: skewY(-2deg);
+    }
+    img {
+      width: 30vw;
+    }
+    p {
+      font-size: 2.5vw;
+    }
+  }
+  .section-3 {
+    padding-top: $sp-3 * 2;
+    padding-bottom: $sp-3 * 6;
+    text-align: center;
+    h1 {
+      margin-bottom: $sp-4;
+    }
+    .column {
+      img {
+        max-width: 50%;
+        padding-bottom: $sp-2;
+      }
+      p {
+        font-size: $f-h4;
+      }
+    }
+  }
+  .section-4 {
+    background-color: $gray-200;
+    text-align: center;
+    padding: $sp-3 * 2;
+    h1 {
+      margin-bottom: $sp-4;
+    }
+    .madewith {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      img {
+        max-width: 100%;
+      }
+    }
+  }
 }
 
 .SignUpView {
