@@ -59,11 +59,17 @@ export default function HomeView(props: HomeViewProps) {
             </Col>
             <Col className="column" md={4}>
               <img src={feat2} />
-              <p>Live updates from Hospitals and medical officials</p>
+              <p>
+                Percent risk and exposure for specific locations within every
+                municipality.
+              </p>
             </Col>
             <Col className="column" md={4}>
               <img src={feat3} />
-              <p>Live updates from Hospitals and medical officials</p>
+              <p>
+                Encrypted tokens to prevent information breaches and limit
+                editing to verified accounts.
+              </p>
             </Col>
           </Row>
         </Container>

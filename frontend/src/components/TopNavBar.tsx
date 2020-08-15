@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Nav, Navbar } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { LoginState } from "../types";
 import logo from "../../assets/logo.png";
 
@@ -11,6 +11,7 @@ type TopNavBarProps = {
 
 export default function TopNavBar(props: TopNavBarProps) {
   const history = useHistory();
+  const location = useLocation();
   function handleLoginClick() {
     history.push("/login");
   }
@@ -21,9 +22,16 @@ export default function TopNavBar(props: TopNavBarProps) {
     props.onLogout();
     history.push("/");
   }
+  const variant = location.pathname === "/map" ? "dark" : "light";
+  const background = location.pathname === "/map" ? "dark" : "light";
 
   return (
-    <Navbar className="TopNavBar" variant="dark" bg="dark" sticky="top">
+    <Navbar
+      className="TopNavBar"
+      variant={variant}
+      bg={background}
+      sticky="top"
+    >
       <Navbar.Brand href="/">
         <img
           src={logo}
@@ -40,7 +48,11 @@ export default function TopNavBar(props: TopNavBarProps) {
           <Nav.Link href="/map">Map</Nav.Link>
           <Nav.Link href="/dashboard">Dashboard</Nav.Link>
         </Nav>
-        {props.login ? (
+        <Nav>
+          <Nav.Link href="/login">Login</Nav.Link>
+          <Nav.Link href="/signup">Signup</Nav.Link>
+        </Nav>
+        {/* {props.login ? (
           <Form inline>
             <Navbar.Text className="mr-3">
               {props.login.hospital.name}
@@ -53,16 +65,16 @@ export default function TopNavBar(props: TopNavBarProps) {
           <Form inline>
             <Button
               className="mr-3"
-              variant="outline-light"
+              variant={variant}
               onClick={handleLoginClick}
             >
               Login
             </Button>
-            <Button variant="outline-light" onClick={handleSignupClick}>
+            <Button variant={variant} onClick={handleSignupClick}>
               Signup
             </Button>
           </Form>
-        )}
+        )} */}
       </Navbar.Collapse>
     </Navbar>
   );
