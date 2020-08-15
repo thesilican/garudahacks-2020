@@ -5,6 +5,7 @@ const HospitalSchema = require('../models/Hospital');
 const PersonSchema = require('../models/Person');
 const Person = require("../models/Person");
 const http = require('http');
+const https = require('https');
 
 const mapKey = "vB1pr57eLEPE16cvLAWLIjx4ULt5sNIG"
 const router = express.Router();
@@ -242,6 +243,80 @@ router.get('/location', (req, res)=>{
 
 
 
+})
+
+
+//reverse geo
+router.get('/reversegeo', (req, res) =>{
+
+    let lat = req.query.lat;
+    let lng = req.query.lng;
+    let url = "/v1/revgeocode?at=";
+
+    url = url + lat + "%2C" + lng + "&lang=en-US&apiKey=KNZWFFoClzG0wis5_O7aAkXvzq0mPctnnKuQ2ubQhuM";
+    url = "https://revgeocode.search.hereapi.com" + url;
+
+    //console.log(url);
+
+    var str = "";
+    https.get(url, (resp)=>{
+        resp.on('data', (chunk)=>{
+            str += chunk;
+        })
+
+        resp.on('end', ()=>{
+            let data = JSON.parse(str);
+            //console.log(data);
+
+            res.json({
+                address: data.items[0].address.label
+            })
+        })
+    }).end();
+})
+
+
+//discover
+router.get('/discover', (req, res) =>{
+
+    let lat = req.query.lat;
+    let lng = req.query.lng;
+    let search = req.query.search;
+    let url = "https://discover.search.hereapi.com/v1/discover?at=";
+
+    url = url + lat + "," + lng + "&lang=en-US&apiKey=KNZWFFoClzG0wis5_O7aAkXvzq0mPctnnKuQ2ubQhuM&q=" + search;
+
+
+    console.log(url);
+
+    var str = "";
+    https.get(url, (resp)=>{
+        resp.on('data', (chunk)=>{
+            str += chunk;
+        })
+
+        resp.on('end', ()=>{
+            let data = JSON.parse(str);
+            //console.log(data);
+            let list = [];
+
+            data.items.forEach((entry) =>{
+                let k = {
+                    address: entry.address.label,
+                    position:{
+                        lat: entry.position.lat,
+                        lng: entry.position.lng
+                    }
+                }
+                list.push(k);
+            })
+
+
+            res.json({
+                places: list
+            })
+        })
+    }).end();
 })
 
 
