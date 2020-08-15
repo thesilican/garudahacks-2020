@@ -23,6 +23,6 @@ mongoose.connect("mongodb+srv://testboy:testboy@rest.tmyts.mongodb.net/Garuda?re
 })
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Listening on port 3000...");
 });
