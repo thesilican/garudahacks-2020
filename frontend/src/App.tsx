@@ -28,7 +28,7 @@ export default function App() {
   }
 
   return (
-    <Google>
+    <Google apiKey={"AIzaSyAVwuGqxTCjfzcEaUf9FEt7fETP-qAj61Q"}>
       <div className="App">
         <BrowserRouter>
           <TopNavBar login={login} onLogout={handleLogout} />
