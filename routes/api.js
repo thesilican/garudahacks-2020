@@ -268,9 +268,17 @@ router.get('/reversegeo', (req, res) =>{
             let data = JSON.parse(str);
             //console.log(data);
 
-            res.json({
-                address: data.items[0].address.label
-            })
+            
+            try{
+                res.json({
+                    address: data.items[0].address.label
+                })
+            }
+            catch(e){
+                res.json({
+                    address: "No address found"
+                })
+            }
         })
     }).end();
 })
