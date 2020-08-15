@@ -6,13 +6,13 @@ const path = require('path');
 
 const app = express();
 app.use(express.json());
-app.use("/", express.static("../frontend/build"));
+app.use("/", express.static("./frontend/build"));
 app.use('/api', apiRoute);
 
 
 //main routes
 app.get("*", async (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"), "utf-8");
+  res.sendFile(path.join(__dirname, "./frontend/build/index.html"), "utf-8");
 });
 
 
