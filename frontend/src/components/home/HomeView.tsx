@@ -1,15 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import logo from "../../../assets/logo.png";
-import img1 from "../../../assets/indonesia_heatmap.png";
+import { Col, Container, Row } from "react-bootstrap";
 import feat1 from "../../../assets/feature1.png";
 import feat2 from "../../../assets/feature2.png";
 import feat3 from "../../../assets/feature3.png";
+import img1 from "../../../assets/indonesia_heatmap.png";
+import logo from "../../../assets/logo.png";
 import tool1 from "../../../assets/tool1.png";
 import tool2 from "../../../assets/tool2.png";
 import tool3 from "../../../assets/tool3.png";
 import tool4 from "../../../assets/tool4.png";
-import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 
 type HomeViewProps = {};
 
@@ -37,13 +36,19 @@ export default function HomeView(props: HomeViewProps) {
         <Row>
           <Col md={1}></Col>
           <Col md={10} className="content">
-            <p className="font-size-lg">
-              <span className="font-weight-bold">Hot Spot</span> provides the
-              general public with a way to assess risk in their local
-              communities Joe Mama lorem ipsum dolor set amet Joe Mama lorem
-              ipsum dolor set amet Joe Mama lorem ipsum dolor set amet Joe Mama
-              lorem ipsum dolor set amet Joe Mama lorem ipsum dolor set amet
-            </p>
+            <div className="font-size-lg">
+              <p>
+                <span className="font-weight-bold">Hot Spot</span> provides
+                users with a live, up-to-date heat map that shows the infection
+                risk of various locations, based on the location history of
+                patients with COVID. Hot Spot keeps people safe by indicating
+                high-risk areas/buildings.
+              </p>
+              <p className="font-weight-bold">
+                Our goal is to help local communities around the world stay
+                safer and better informed!
+              </p>
+            </div>
             <img src={img1} />
           </Col>
           <Col md={1}></Col>
@@ -55,7 +60,7 @@ export default function HomeView(props: HomeViewProps) {
           <Row>
             <Col className="column" md={4}>
               <img src={feat1} />
-              <p>Live updates from Hospitals and medical officials</p>
+              <p>Live updates from hospitals and medical officials</p>
             </Col>
             <Col className="column" md={4}>
               <img src={feat2} />

@@ -60,7 +60,7 @@ export default function HeatMapView(props: HeatMapViewProps) {
           handleFloatChange(e.latLng.toJSON());
         }}
       >
-        <HeatMap data={data ?? []} radius={15} />
+        <HeatMap data={data ?? []} radius={30} maxIntensity={8} />
         {floatMarker && (
           <>
             <Marker
@@ -80,14 +80,14 @@ export default function HeatMapView(props: HeatMapViewProps) {
             <Circle
               fillColor="#DDDD00"
               strokeColor="#DDDD00"
-              radius={25}
+              radius={50}
               center={floatMarker}
               clickable={false}
             />
             <Circle
               fillColor="#00DD00"
               strokeColor="#00DD00"
-              radius={100}
+              radius={200}
               center={floatMarker}
               clickable={false}
             />
@@ -115,7 +115,7 @@ export default function HeatMapView(props: HeatMapViewProps) {
               <br />
               <span>{infectionChance[0].toFixed(1)} infection points</span>
               <br />
-              <a target="_blank" href="/about">
+              <a target="_blank" href="/about#infection-points">
                 What are infection points?
               </a>
             </span>

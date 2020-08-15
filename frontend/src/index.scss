@@ -173,6 +173,39 @@ body,
   }
 }
 
+.AboutView {
+  padding: $sp-3;
+  background-color: $light;
+  p {
+    font-size: $f-lg;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      margin-bottom: 0;
+      margin-top: $sp-1;
+    }
+    img {
+      width: $sp-3 * 5;
+    }
+  }
+  .section-1 {
+    img {
+      width: $sp-3 * 15;
+    }
+  }
+  .section-2 {
+    img {
+      width: 100%;
+      padding-bottom: $sp-3;
+    }
+  }
+}
+
 .SignUpView {
   background-color: $light;
   .form {
@@ -196,6 +229,7 @@ body,
 .HeatMapView {
   position: relative;
   .controls {
+    pointer-events: none;
     position: absolute;
     left: $sp-3;
     bottom: $sp-3 * 2;
@@ -204,6 +238,7 @@ body,
     align-items: flex-end;
   }
   .stats {
+    pointer-events: visible;
     width: $sp-3 * 15;
     background-color: #ffffff;
     padding: $sp-3;
@@ -248,6 +283,7 @@ body,
     }
   }
   .search {
+    pointer-events: visible;
     width: $sp-3 * 20;
     input {
       width: 100%;
@@ -255,7 +291,7 @@ body,
     span {
       background-color: $white;
       padding: $sp-1;
-      margin-bottom: $sp-1
+      margin-bottom: $sp-1;
     }
   }
 }

@@ -32,10 +32,10 @@ const Util = {
     for (const inf of infections) {
       const dist = Util.getDistance(inf, location);
       if (dist < 10) {
-        sum += Math.sqrt(inf.weight) * 10;
-      } else if (dist < 25) {
+        sum += Math.sqrt(inf.weight) * 7;
+      } else if (dist < 50) {
         sum += Math.sqrt(inf.weight);
-      } else if (dist < 100) {
+      } else if (dist < 200) {
         sum += Math.sqrt(inf.weight) / 10;
       }
     }
