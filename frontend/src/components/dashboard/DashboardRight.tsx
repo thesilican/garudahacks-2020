@@ -3,7 +3,7 @@ import {
   DefaultCoordinate,
   Map,
   Marker,
-  WeightedCoordinate
+  WeightedCoordinate,
 } from "@thesilican/react-google-maps";
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -61,7 +61,7 @@ export default function DashboardRight(props: DashboardRightProps) {
   function handleAddButtonClick() {
     if (!floatMarker) {
       alert(
-        "Click on the map to add a location, or search for a location in the chat box"
+        "Click on the map to add a location, or search for a location using the search bar"
       );
       return;
     }
@@ -76,6 +76,16 @@ export default function DashboardRight(props: DashboardRightProps) {
   }
   function handleRemoveButtonClick() {
     setRemove(!remove);
+  }
+  function handleInfoClick() {
+    alert(
+      "This is the main dashboard where you (the hospital) can add patient data.\n" +
+        "Add or remove patients from your patient list using the buttons on the bottom left\n" +
+        "You can add locations that a COVID-infected patient has visited recently to the map. Click on the map or " +
+        "search for a specific location using the search bar. Once the marker is added, " +
+        "click 'Set hours & confirm' to add the location to the map.\n" +
+        "You can remove markers that were added by mistake by clicking 'Remove' and then clicking on the markers"
+    );
   }
 
   return (
@@ -122,9 +132,12 @@ export default function DashboardRight(props: DashboardRightProps) {
         <Button className="mr-2" onClick={handleAddButtonClick}>
           {floatMarker ? "Set hours & confirm" : "Add new location"}
         </Button>
-        <Button onClick={handleRemoveButtonClick} variant="danger">
+        <Button className="mr-2" onClick={handleRemoveButtonClick} variant="danger">
           {remove ? "Click on a marker to remove it" : "Remove"}
         </Button>
+        <a href="" onClick={handleInfoClick}>
+          Help
+        </a>
       </div>
     </div>
   );
