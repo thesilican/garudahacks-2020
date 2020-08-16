@@ -48,22 +48,21 @@ export default function AboutView(props: AboutViewProps) {
             <div className="section-2">
               <h2>The Heat Map</h2>
               <p>
-                Clicking on the map will show the address of that location, as
-                well as provide the user with a rating about how safe that
-                locations is.
+                Clicking on a location on the map will show a rating about how
+                safe that locations is.
               </p>
               <p>The ratings are:</p>
               <ul>
                 <li>Safe - No significant COVID infections nearby</li>
                 <li>
-                  Moderate - Some people with COVID have been nearby, be more
+                  Moderate - Some people with COVID have been nearby, be
                   cautious when visiting this location
                 </li>
                 <li>
                   Dangerous - Either someone with COVID has directly been to
                   this location, or multiple infected people have been nearby.
                   Avoid going to this location if you can, or proceed with extra
-                  precautions
+                  caution.
                 </li>
                 <li>
                   Highly dangerous - Many people infected with COVID has visited
@@ -79,8 +78,8 @@ export default function AboutView(props: AboutViewProps) {
               </p>
               <img src={about2} />
               <p>
-                Users can also search for locations using the search bar at the
-                bottom
+                Users can also search for a specific location using the search
+                bar at the bottom.
               </p>
             </div>{" "}
             <div className="section-3">

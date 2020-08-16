@@ -83,7 +83,7 @@ export default function DashboardRight(props: DashboardRightProps) {
       <Form inline className="top" onSubmit={handleSearchSubmit}>
         <Form.Control
           className="mr-2"
-          placeholder="Search for location"
+          placeholder="Search for a nearby location"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         ></Form.Control>

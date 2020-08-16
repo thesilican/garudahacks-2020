@@ -134,7 +134,7 @@ export default function HeatMapView(props: HeatMapViewProps) {
           <Form.Control
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder={"Search for a location"}
+            placeholder={"Search for a nearby location"}
           />
         </Form>
       </div>
