@@ -171,6 +171,11 @@ body,
       }
     }
   }
+  .footer {
+    color: $light;
+    background-color: $dark;
+    padding: $sp-3;
+  }
 }
 
 .AboutView {

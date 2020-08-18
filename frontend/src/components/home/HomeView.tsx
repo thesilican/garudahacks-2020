@@ -99,6 +99,23 @@ export default function HomeView(props: HomeViewProps) {
           </div>
         </div>
       </div>
+      <div className="footer">
+        Submitted to{" "}
+        <a href="http://garudahacks.com/" target="_blank">
+          Garudahacks 2020
+        </a>
+        {" | "}
+        <a href="https://devpost.com/software/hot-spot-4961jt" target="_blank">
+          Submissions Page
+        </a>
+        {" | "}
+        <a
+          href="https://github.com/thesilican/garudahacks-2020"
+          target="_blank"
+        >
+          GitHub
+        </a>
+      </div>
     </div>
   );
 }
